@@ -41,6 +41,8 @@ jobs:
   scan:
     needs: list-repos
     if: needs.list-repos.outputs.count != '0'
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       max-parallel: 15
