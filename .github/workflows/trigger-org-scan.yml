@@ -28,9 +28,9 @@ jobs:
         run: |
           set -euo pipefail
           if [[ "$INCLUDE_ARCHIVED" == "true" ]]; then
-            ALL=$(gh repo list hngprojects --limit 500 --json name --jq '.[].name')
+            ALL=$(gh repo list emerjent --limit 500 --json name --jq '.[].name')
           else
-            ALL=$(gh repo list hngprojects --limit 500 --no-archived --json name --jq '.[].name')
+            ALL=$(gh repo list emerjent --limit 500 --no-archived --json name --jq '.[].name')
           fi
           JSON=$(printf '%s\n' "$ALL" | jq -R -c -s 'split("\n") | map(select(length > 0))')
           COUNT=$(echo "$JSON" | jq 'length')
@@ -107,7 +107,7 @@ jobs:
               echo "|------|-----------:|------------:|----------------:|-------------|"
               for entry in "${INFECTED[@]}"; do
                 IFS='|' read -r repo hc bc hic push <<< "$entry"
-                echo "| [\`$repo\`](https://github.com/hngprojects/$repo) | $hc | $bc | $hic | $push |"
+                echo "| [\`$repo\`](https://github.com/emerjent/$repo) | $hc | $bc | $hic | $push |"
               done
               echo ""
             fi
